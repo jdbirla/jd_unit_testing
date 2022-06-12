@@ -1,5 +1,11 @@
 # JD Unit Testing
 
+
+##  Junit vs Mockito vs Spring Junit vs Spring Mockito vs Spring Boot junit and Spring Boot Mockito
+|#  |Junit|Mockito |Spring Junit|Spring Mockito|Spring Boot junit|Spring Boot Mockito |
+|dependency|Not Required  |junit and mockito-all    |spring-test and mockito-core			|spring-test and mockito-core           |spring-boot-starter	     |spring-boot-starter				  |
+|code|```@Test 	public void test() { 		boolean condn = true; 		assertEquals(true, condn); 		assertTrue(condn); 		// assertFalse(condn); 	}```  |```@Test 	public void usingMockito() { 		TodoService todoService = mock(TodoService.class); 		List<String> allTodos = Arrays.asList("Learn Spring MVC", 				"Learn Spring", "Learn to Dance"); 		when(todoService.retrieveTodos("Ranga")).thenReturn(allTodos); 		TodoBusinessImpl todoBusinessImpl = new TodoBusinessImpl(todoService); 		List<String> todos = todoBusinessImpl 				.retrieveTodosRelatedToSpring("Ranga"); 		assertEquals(2, todos.size()); 	}```     |```@RunWith(SpringRunner.class)/@RunWith(SpringJUnit4ClassRunner.class) public class SpringIn5StepsBasicApplicationTests {  	@Test 	public void contextLoads() { 	}  }  @RunWith(SpringRunner.class) @ContextConfiguration(classes = SpringIn5StepsBasicApplication.class) public class BinarySearchTest {  	// Get this bean from the context 	@Autowired 	BinarySearchImpl binarySearch; ```			|```@RunWith(MockitoJUnitRunner.class) public class SomeCdiBusinessTest {  	// Inject Mock 	@InjectMocks 	SomeCdiBusiness business;  	// Create Mock 	@Mock 	SomeCdiDao daoMock;  	@Test 	public void testBasicScenario() { 		Mockito.when(daoMock.getData()).thenReturn(new int[] { 2, 4 }); 		assertEquals(4, business.findGreatest()); 	}	```          |```@Test```			     |```@RunWith(SpringRunner.class) @SpringBootTest public class MockitoDemoApplicationTests {  	@Test 	public void contextLoads() { 	}  } @RunWith(MockitoJUnitRunner.class) public class SomeBusinessMockAnnotationsTest {  	@Mock 	DataService dataServiceMock;  	@InjectMocks 	SomeBusinessImpl businessImpl;  	@Test 	public void testFindTheGreatestFromAllData() { 		when(dataServiceMock.retrieveAllData()).thenReturn(new int[] { 24, 15, 3 }); 		assertEquals(24, businessImpl.findTheGreatestFromAllData()); 	}```				  |
+
 # Junit 
 src  : - https://courses.in28minutes.com/courses/enrolled/257253
 
@@ -426,7 +432,7 @@ class SpringTestContext {
 // 2. How do we tell Spring to use specific Configuration
 // 3. How do autowire the TodoBusinessService
 // 4. How do we auto wire TodoDataServiceStub
-@RunWith(SpringJUnit4ClassRunner.class)
+@RunWith(SpringJUnit4ClassRunner.class) 
 @ContextConfiguration(classes = SpringTestContext.class)
 public class TodoBusinessServiceJavaStubTest {
 
