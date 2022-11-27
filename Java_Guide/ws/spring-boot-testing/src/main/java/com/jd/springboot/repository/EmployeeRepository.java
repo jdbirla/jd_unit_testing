@@ -5,6 +5,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.Optional;
+
 /**
  * Created by jd birla on 23-11-2022 at 09:49
  */
@@ -26,4 +28,7 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
     //Native sql query with named parameters
     @Query(value = "select * from employees e where e.fisrt_name =:firstName and  e.last_name=:lastName" , nativeQuery = true)
     Employee findByNativeSqlNamedParams(@Param("firstName") String firstName , @Param("lastName") String lastName);
+
+
+    Optional<Employee> findByEmail(String email);
 }

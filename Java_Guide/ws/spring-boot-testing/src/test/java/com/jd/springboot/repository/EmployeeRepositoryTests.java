@@ -93,7 +93,6 @@ public class EmployeeRepositoryTests {
 //        employeeRepository.save(employee1);
         //When
         Employee emp = employeeRepository.findByFirstLastName("Jitendra", "Birla");
-
         //Then
         Assertions.assertThat(emp).isNotNull();
         Assertions.assertThat(emp).isEqualTo(employee);
@@ -147,6 +146,24 @@ public class EmployeeRepositoryTests {
 //        employeeRepository.save(employee1);
         //When
         Employee emp = employeeRepository.findByNativeSqlNamedParams("Jitendra", "Birla");
+
+        //Then
+        Assertions.assertThat(emp).isNotNull();
+        Assertions.assertThat(emp).isEqualTo(employee);
+
+    }
+
+    @Test
+    @DisplayName("Test find all employees")
+    public void givenEmployeeList_whenFindAll_thenReturingEmployeeList()
+    {
+        //given
+//        Employee employee =  Employee.builder().firstName("Jitendra").lastName("Birla").email("jitendra.birla@gmail.com").build();
+//        Employee employee1 =  Employee.builder().firstName("Jitu").lastName("Birla").email("jitendra@gmail.com").build();
+//        employeeRepository.save(employee);
+//        employeeRepository.save(employee1);
+        //When
+        Employee emp = employeeRepository.findByNativeSql("Jitendra", "Birla");
 
         //Then
         Assertions.assertThat(emp).isNotNull();
