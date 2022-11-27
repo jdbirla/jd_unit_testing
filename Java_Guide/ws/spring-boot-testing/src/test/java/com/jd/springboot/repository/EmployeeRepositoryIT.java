@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import java.util.List;
@@ -14,7 +15,8 @@ import java.util.List;
  * Created by jd birla on 23-11-2022 at 10:37
  */
 @DataJpaTest
-public class EmployeeRepositoryTests {
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+public class EmployeeRepositoryIT {
     @Autowired
     private EmployeeRepository employeeRepository;
     private Employee employee;
