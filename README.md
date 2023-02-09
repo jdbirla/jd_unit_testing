@@ -13,6 +13,7 @@
 - [Mockito](#mockito)
 - [Service-Layer](#service-layer)
 - [Controller-Layer(@WebMvcTest)](#controller-layer)
+    - @MockBean : The @MockBean annotation tells spring to create instance of EmployeeService and add it to the application context so that it's injected into employeeController.
 ### [2.Integration Testing](#integration-testing)
 
 ### [3.Test Container](#test-container)
