@@ -6,7 +6,8 @@
 
 ### [1.Unit Testing](#unit-testing)
 - [Repository-Layer (@DataJpaTest)](#repository-layer)
-
+- [Mockito](#mockito)
+- [Service-Layer](#service-layer)
 ### [2.Integration Testing](#integration-testing)
 
 ### [3.Test Container](#test-container)
@@ -194,6 +195,27 @@ public class EmployeeRepositoryTests {
 }
 
 ```
+---
+## Mockito
+ - 
+
+---
+## Service Layer
+ - We need to mock repository layer using Mockito
+ - mock()/@Mock : We can mock an class or interface
+ - @InjectMocks :  When we want to inject a mocker object into another mocked object , we can use @InjectMocks annoation.
+                   @InejctMock created the mock object of the class and injects the mocks that are marked with the annotation @Mock
+```java
+@ExtendWith(MockitoExtension.class)
+public class EmployeeServiceTests {
+
+    @Mock
+    EmployeeRepository employeeRepository;
+    @InjectMocks
+    EmployeeServiceImpl employeeService;
+```
+---
+
 ## Integration Testing
 
 ## Test Container
