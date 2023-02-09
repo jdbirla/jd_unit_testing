@@ -533,8 +533,13 @@ public class EmployeeControllerTests {
 }
 
 ```
-## Integration Testing
+---
 
+## Integration Testing
+   - @springBootTest : It start the embedded server, creates a web env and then enables @test methods to do integration testing.
+   ![image](https://user-images.githubusercontent.com/69948118/217783311-60461844-7400-455a-8dd0-13b1fbebcca7.png)
+    
+---
 ## Test Container
 
 
