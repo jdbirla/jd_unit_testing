@@ -2,12 +2,16 @@
 - Sping-boot-starter-test
    - spring specific
    - Junit , Mockito , hamcrest, AssertJ, JSONassert and JsonPath
- 
+   - Hamcrest : called matcher it working with Junit and assertj unit testing framwork
+                 it has is() method of the matchers class `assertThat(Actual, is(EXPECTED))`
+   - JsonPath lib : jsonpath is used to test JSON response from service , root member object in is always refer to as '$'
+   
 
 ### [1.Unit Testing](#unit-testing)
 - [Repository-Layer (@DataJpaTest)](#repository-layer)
 - [Mockito](#mockito)
 - [Service-Layer](#service-layer)
+- [Controller-Layer](#controller-layer)
 ### [2.Integration Testing](#integration-testing)
 
 ### [3.Test Container](#test-container)
@@ -340,6 +344,10 @@ public class EmployeeServiceTests {
 }
 
 ```
+---
+### Controller-Layer
+- @WebMvcTest : It won't load service and repository 
+- We need to mock service layer
 ## Integration Testing
 
 ## Test Container
