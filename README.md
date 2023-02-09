@@ -5,7 +5,7 @@
  
 
 ### [1.Unit Testing](#unit-testing)
-- [Factory Pattern](#factory-pattern)
+- [Repository-Layer (@DataJpaTest)](#repository-layer)
 
 ### [2.Integration Testing](#integration-testing)
 
@@ -20,7 +20,11 @@
 
 
 ## Unit Testing
-
+### Repository-Layer
+-it loads only repository layer not the service and controlller
+- it will autocinfigure in-memory data for testing
+- by default test annotated with @DataJpaTest is transacational and will rollback et end
+- 
 ## Integration Testing
 
 ## Test Container
