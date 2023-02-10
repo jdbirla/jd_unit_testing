@@ -753,8 +753,59 @@ public class EmployeeControllerITests {
 			<scope>test</scope>
 		</dependency>
 ```
-- 
+- Default mysql container properties
+```
+#DB username  -> test
+#DB pass  ->test
+#DB dbname  -> test
+#DB url    -> jdbc:mysql://localhost:9332/test
+```
+- Singleton container
+```jav
+package com.jd.springboot.intergration;
 
+import org.springframework.test.context.DynamicPropertyRegistry;
+import org.springframework.test.context.DynamicPropertySource;
+import org.testcontainers.containers.MySQLContainer;
+import org.testcontainers.junit.jupiter.Container;
+
+/**
+ * Created by jd birla on 27-11-2022 at 06:56
+ */
+public abstract class AbstractionBaseTest {
+
+    static final MySQLContainer MY_SQL_CONTAINER;
+    static {
+        MY_SQL_CONTAINER = new MySQLContainer("mysql:latest").withDatabaseName("empdb").withUsername("empuser").withPassword("emppass");
+        MY_SQL_CONTAINER.start();
+    }
+
+//this one for add daynamic properties into application context from container
+    @DynamicPropertySource
+    public static void dynamicPropertySource(DynamicPropertyRegistry dynamicPropertyRegistry)
+    {
+        dynamicPropertyRegistry.add("spring.datasource.url",MY_SQL_CONTAINER::getJdbcUrl);
+        dynamicPropertyRegistry.add("spring.datasource.username",MY_SQL_CONTAINER::getUsername);
+        dynamicPropertyRegistry.add("spring.datasource.password",MY_SQL_CONTAINER::getPassword);
+
+    }
+}
+
+```
+- we need to just exten singleton abract class other test method coded will be same like integration test
+```java
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@AutoConfigureMockMvc
+public class EmployeeControllerITTestContainer extends AbstractionBaseTest{
+```
+- for Repository integration test we can also use testcontainer 
+```java
+@DataJpaTest
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+public class EmployeeRepositoryITTestContainer extends AbstractionBaseTest {
+```
+
+---
 
 # Old Test sheet
 ##  Junit vs Mockito vs Spring Junit vs Spring Mockito vs Spring Boot junit and Spring Boot Mockito
