@@ -13,3 +13,207 @@ https://assertj.github.io/doc/
 ![image](https://user-images.githubusercontent.com/69948118/227900416-7ce964aa-6198-405a-b7dd-c976c667d728.png)
 ![image](https://user-images.githubusercontent.com/69948118/227900755-0a220651-3bc7-40fa-807d-7cbc02218ca3.png)
 ![image](https://user-images.githubusercontent.com/69948118/227901476-e2b99ea2-d833-4320-ad14-ea26015debff.png)
+
+## Junit 5 features
+https://junit.org/junit5/docs/current/user-guide/
+![image](https://user-images.githubusercontent.com/69948118/227905284-84cff68f-7e0d-4b6c-8ba8-501bf8c07a20.png)
+```java
+package com.sivalabs.jtme;
+
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+class LifecycleCallbacksDemoTest {
+
+    @BeforeAll
+    static void beforeAll() {
+        System.out.println("--------beforeAll()---------");
+    }
+
+    @AfterAll
+    static void afterAll() {
+        System.out.println("--------afterAll()---------");
+    }
+
+    @BeforeEach
+    void setUp() {
+        System.out.println("--------setUp()---------");
+    }
+
+    @AfterEach
+    void tearDown() {
+        System.out.println("--------tearDown()---------");
+    }
+
+    @Test
+    void test1() {
+        System.out.println("------------test1------------");
+    }
+
+    @Test
+    void test2() {
+        System.out.println("------------test2------------");
+    }
+}
+```
+```java
+package com.sivalabs.jtme;
+
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.Timeout;
+
+import java.util.concurrent.TimeUnit;
+
+@TestInstance(value = TestInstance.Lifecycle.PER_CLASS)
+class TestInstanceLifecycleDemoTest {
+
+    @Test
+    @DisplayName("Given a person to save with existing email then it should throw Exception")
+    @Tag("unit")
+    @Timeout(value = 5, unit = TimeUnit.SECONDS)
+    void test1() throws InterruptedException {
+        System.out.println("test1:"+this.hashCode());
+        Thread.sleep(3000);
+    }
+
+    @Test
+    @Tag("integration")
+    @Disabled
+    void test2() {
+        System.out.println("test2:"+this.hashCode());
+    }
+
+}
+```
+```java
+package com.sivalabs.jtme;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.EnabledOnJre;
+import org.junit.jupiter.api.condition.EnabledOnOs;
+import org.junit.jupiter.api.condition.JRE;
+import org.junit.jupiter.api.condition.OS;
+
+class ConditionalTestExecutionDemoTest {
+
+    @Test
+    @EnabledOnOs(OS.MAC)
+    void shouldRunOnlyOnMacOS() {
+        System.out.println("This is a test running on MacOS");
+    }
+
+    @Test
+    @EnabledOnOs(OS.WINDOWS)
+    void shouldRunOnlyOnWindows() {
+        System.out.println("This is a test running on Windows");
+    }
+
+    @Test
+    @EnabledOnJre(JRE.JAVA_17)
+    void shouldRunOnlyOnJre17() {
+        System.out.println("This is a test running on Java 17");
+    }
+
+    @Test
+    @EnabledOnJre(JRE.JAVA_21)
+    void shouldRunOnlyOnJre21() {
+        System.out.println("This is a test running on Java 21");
+    }
+
+}
+```
+![image](https://user-images.githubusercontent.com/69948118/227911511-1de143cc-864b-4220-b05f-2b50cd095c12.png)
+```java
+package com.sivalabs.jtme;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import java.util.stream.Stream;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.params.provider.Arguments.arguments;
+
+class PersonServiceParameterizedTests {
+    PersonService personService;
+
+    @BeforeEach
+    void setUp() {
+        PersonRepository repo = new PersonRepository();
+        personService = new PersonService(repo);
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+            "Siva1,siva1@gmail.com",
+            "Siva2,siva2@gmail.com",
+            "Siva3,siva3@gmail.com",
+    })
+    void shouldCreatePersonUsingCSVSuccessfully(String name, String email) {
+        Person person = personService.create(new Person(null, name, email));
+        assertNotNull(person.getId());
+        assertEquals(name, person.getName());
+        assertEquals(email, person.getEmail());
+    }
+
+    @ParameterizedTest
+    @MethodSource("personPropsProvider")
+    void shouldCreatePersonSuccessfully(String name, String email) {
+        Person person = personService.create(new Person(null, name, email));
+        assertNotNull(person.getId());
+        assertEquals(name, person.getName());
+        assertEquals(email, person.getEmail());
+    }
+
+    static Stream<Arguments> personPropsProvider() {
+        return Stream.of(
+                arguments("Siva", "siva@gmail.com"),
+                arguments("Prasad", "prasad@gmail.com")
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("personObjectsProvider")
+    void shouldCreatePersonWithObjectInputSuccessfully(Person personInput) {
+        Person person = personService.create(personInput);
+        assertNotNull(person.getId());
+        assertEquals(personInput.getName(), person.getName());
+        assertEquals(personInput.getEmail(), person.getEmail());
+    }
+
+    static Stream<Arguments> personObjectsProvider() {
+        return Stream.of(
+                arguments(new Person(null, "Neha", "neha@gmail.com")),
+                arguments(new Person(null, "Yuvaan", "yuvaan@gmail.com"))
+        );
+    }
+}
+```
+- junit-platform.properties
+```
+junit.jupiter.execution.parallel.enabled = true
+junit.jupiter.execution.parallel.mode.default = concurrent
+```
+- Configuration parameters to execute top-level classes in parallel but methods in same thread
+```
+junit.jupiter.execution.parallel.enabled = true
+junit.jupiter.execution.parallel.mode.default = same_thread
+junit.jupiter.execution.parallel.mode.classes.default = concurrent
+```
+- Configuration parameters to execute top-level classes sequentially but their methods in parallel
+```
+junit.jupiter.execution.parallel.enabled = true
+junit.jupiter.execution.parallel.mode.default = concurrent
+junit.jupiter.execution.parallel.mode.classes.default = same_thread
+```
