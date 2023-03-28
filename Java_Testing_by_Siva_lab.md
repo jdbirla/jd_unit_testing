@@ -405,6 +405,11 @@ class SalesServiceTest {
 }
 ```
 
-# Best Practices and Anit-Patterns
+## Best Practices and Anit-Patterns
 ![image](https://user-images.githubusercontent.com/69948118/227926726-68297dcf-0e67-49b3-bbfb-6e1e850c968d.png)
+
+## Integration Test
+![image](https://user-images.githubusercontent.com/69948118/228099383-a0352eb7-dc15-42c0-a0fc-9a7248661995.png)
+![image](https://user-images.githubusercontent.com/69948118/228099526-b8771e32-e35d-4b5c-8fa1-d6f644cd53af.png)
+![image](https://user-images.githubusercontent.com/69948118/228101011-669269c5-ee08-4e46-b289-fb9b354329b4.png)
 
