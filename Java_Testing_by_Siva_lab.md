@@ -414,6 +414,8 @@ class SalesServiceTest {
 ![image](https://user-images.githubusercontent.com/69948118/228101011-669269c5-ee08-4e46-b289-fb9b354329b4.png)
 
 ## Integration Testing using TestContainers and RestAssured
+https://testcontainers.com/guides/testing-spring-boot-rest-api-using-testcontainers/
+https://www.testcontainers.org/
 ![image](https://user-images.githubusercontent.com/69948118/228104440-d6694fe2-b523-4b20-aa72-5ba8159eb1f6.png)
 ![image](https://user-images.githubusercontent.com/69948118/228104321-120ac457-acdb-44e8-a7aa-6537f62df3db.png)
 
@@ -490,3 +492,57 @@ class CustomerControllerTest {
     }
 }
 ```
+
+## Testing Database Repository
+```java
+package com.sivalabs.tcdemo;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.context.TestPropertySource;
+
+import java.util.List;
+import java.util.Optional;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+@DataJpaTest
+@TestPropertySource(properties = {
+        "spring.test.database.replace=none",
+        "spring.datasource.url=jdbc:tc:postgresql:15.2-alpine:///db"
+})
+class CustomerRepositoryTest {
+
+    @Autowired
+    CustomerRepository customerRepository;
+
+    @BeforeEach
+    void setUp() {
+       customerRepository.deleteAll();
+    }
+
+    @Test
+    void shouldGetAllCustomers() {
+        List<Customer> customers = List.of(
+                new Customer(null, "John", "john@mail.com", "john"),
+                new Customer(null, "Dennis", "dennis@mail.com", "dennis")
+        );
+        customerRepository.saveAll(customers);
+
+        List<Customer> customerList = customerRepository.findAll();
+        assertThat(customerList).hasSize(2);
+    }
+
+    @Test
+    void shouldLoginSuccessfully() {
+        Customer customer = new Customer(null, "John", "john@mail.com", "john");
+        customerRepository.save(customer);
+
+        Optional<Customer> optionalCustomer = customerRepository.findByEmailAndPassword("john@mail.com", "john");
+        assertThat(optionalCustomer).isPresent();
+    }
+}
+```
+
