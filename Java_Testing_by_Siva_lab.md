@@ -1,4 +1,7 @@
 # Java Testing Made Easy: Learn to write Unit, Integration, E2E & Performance Tests
+- https://www.youtube.com/watch?v=FGoLvCc6BeI&list=PLuNxlOYbv61jtHHFHBOc9N7Dg5jn013ix&index=1
+- https://github.com/sivaprasadreddy/java-testing-made-easy
+
 ![image](https://user-images.githubusercontent.com/69948118/227894970-cf6d86e1-c655-4999-a9ff-7c2a6f17d90a.png)
 ![image](https://user-images.githubusercontent.com/69948118/227895013-e28f1d1b-0c1b-454b-b677-db72bfaca025.png)
 ![image](https://user-images.githubusercontent.com/69948118/227895086-4563be2a-21b2-4993-b195-56b1ad10aeb9.png)
