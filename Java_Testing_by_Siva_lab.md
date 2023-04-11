@@ -967,6 +967,11 @@ class GithubControllerIntegrationTest {
 	}
 }
 ```
+## Java Testing Made Easy : End-To-End Testing using Playwright
+- https://github.com/sivaprasadreddy/devzone/tree/main/playwright-e2e-tests
+- https://playwright.dev/java/
+
+
 
 
 
