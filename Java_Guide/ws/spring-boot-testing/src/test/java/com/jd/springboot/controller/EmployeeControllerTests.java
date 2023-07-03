@@ -3,12 +3,13 @@ package com.jd.springboot.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jd.springboot.model.Employee;
 import com.jd.springboot.services.EmployeeService;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 import org.hamcrest.CoreMatchers;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentMatchers;
 import org.mockito.BDDMockito;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -18,10 +19,6 @@ import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
 
 /**
  * Created by jd birla on 25-11-2022 at 06:50
@@ -43,13 +40,18 @@ public class EmployeeControllerTests {
         //given
         Employee employee = Employee.builder().firstName("Jitu").lastName("Birla").email("jitu@gmail.com").build();
 
-        BDDMockito.given(employeeService.saveEmployee(ArgumentMatchers.any(Employee.class))).willAnswer((invocation -> invocation.getArgument(0)));
+        BDDMockito.given(employeeService.saveEmployee(ArgumentMatchers.any(Employee.class)))
+                .willAnswer((invocation -> invocation.getArgument(0)));
 
         //When
-        ResultActions response = mockMvc.perform(MockMvcRequestBuilders.post("/api/employees").contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(employee)));
+        ResultActions response = mockMvc.perform(MockMvcRequestBuilders.post("/api/employees")
+                .contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(employee)));
 
         //Then
-        response.andDo(MockMvcResultHandlers.print()).andExpect(MockMvcResultMatchers.status().isCreated()).andExpect(MockMvcResultMatchers.jsonPath("$.firstName", CoreMatchers.is(employee.getFirstName()))).andExpect(MockMvcResultMatchers.jsonPath("$.lastName", CoreMatchers.is(employee.getLastName()))).andExpect(MockMvcResultMatchers.jsonPath("$.email", CoreMatchers.is(employee.getEmail())));
+        response.andDo(MockMvcResultHandlers.print()).andExpect(MockMvcResultMatchers.status().isCreated())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.firstName", CoreMatchers.is(employee.getFirstName())))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.lastName", CoreMatchers.is(employee.getLastName())))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.email", CoreMatchers.is(employee.getEmail())));
 
     }
 

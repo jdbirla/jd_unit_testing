@@ -1,26 +1,23 @@
 package com.jd.springboot.service;
 
+import static org.mockito.ArgumentMatchers.any;
+
 import com.jd.springboot.exception.ResurceNotFound;
 import com.jd.springboot.model.Employee;
 import com.jd.springboot.repository.EmployeeRepository;
-import com.jd.springboot.services.EmployeeService;
 import com.jd.springboot.services.Impl.EmployeeServiceImpl;
+import java.util.List;
+import java.util.Optional;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.jupiter.api.extension.Extensions;
 import org.mockito.BDDMockito;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-
-import java.util.List;
-import java.util.Optional;
-
-import static org.mockito.ArgumentMatchers.any;
 
 
 /**
@@ -113,7 +110,6 @@ public class EmployeeServiceTests {
         long employeeid = 1L;
         //given
         BDDMockito.willDoNothing().given(employeeRepository).deleteById(employeeid);
-
         //When
          employeeService.deleteEmployee(employeeid);
         //Then

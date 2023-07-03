@@ -25,7 +25,7 @@ import java.util.Optional;
 /**
  * Created by jd birla on 26-11-2022 at 08:31
  */
-@SpringBootTest
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
 public class EmployeeControllerITests {
 
@@ -49,7 +49,8 @@ public class EmployeeControllerITests {
         Employee employee = Employee.builder().firstName("Jitu").lastName("Birla").email("jitu@gmail.com").build();
 
         //When
-        ResultActions response = mockMvc.perform(MockMvcRequestBuilders.post("/api/employees").contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(employee)));
+        ResultActions response = mockMvc.perform(MockMvcRequestBuilders.post("/api/employees")
+                .contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(employee)));
 
         //Then
         response.andDo(MockMvcResultHandlers.print()).andExpect(MockMvcResultMatchers.status().isCreated())
