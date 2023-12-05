@@ -15,4 +15,34 @@
       // when(mockedList.size()).thenReturn(100);  this is not going to work in Spy object
         doReturn(100).when(spyList).size();
      ```
+  - @Captor
+     - make use of @Captor for the same purpose, to create an ArgumentCaptor instance
+```java
+@Mock
+List mockedList;
 
+@Captor 
+ArgumentCaptor argCaptor;
+
+@Test
+public void whenUseCaptorAnnotation_thenTheSame() {
+    mockedList.add("one");
+    Mockito.verify(mockedList).add(argCaptor.capture());
+
+    assertEquals("one", argCaptor.getValue());
+}
+```
+- @InjectMocks
+   - Now let’s discuss how to use the @InjectMocks annotation to inject mock fields into the tested object automatically
+
+### Mockito ArgumentMatchers
+- https://www.baeldung.com/mockito-argument-matchers
+```java
+  verify(flowerService).analyze(or(eq("poppy"), endsWith("y")));
+```
+
+### Mocking Exception Throwing using Mockito
+- https://www.baeldung.com/mockito-exceptions
+```java
+
+```
