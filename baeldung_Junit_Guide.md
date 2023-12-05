@@ -15,6 +15,7 @@
       // when(mockedList.size()).thenReturn(100);  this is not going to work in Spy object
         doReturn(100).when(spyList).size();
      ```
+     
   - @Captor
      - make use of @Captor for the same purpose, to create an ArgumentCaptor instance
 ```java
@@ -45,4 +46,103 @@ public void whenUseCaptorAnnotation_thenTheSame() {
 - https://www.baeldung.com/mockito-exceptions
 ```java
 
+```
+### Mockito When/Then Cookbook
+- https://www.baeldung.com/mockito-behavior
+ - Configure simple return behavior for mock:
+```java
+MyList listMock = mock(MyList.class);
+when(listMock.add(anyString())).thenReturn(false);
+
+boolean added = listMock.add(randomAlphabetic(6));
+assertThat(added).isFalse();
+```
+
+ - Configure return behavior for mock in an alternative way:
+```java
+MyList listMock = mock(MyList.class);
+doReturn(false).when(listMock).add(anyString());
+
+boolean added = listMock.add(randomAlphabetic(6));
+assertThat(added).isFalse();
+```
+- Configure mock to throw an exception on a method call:
+```java
+MyList listMock = mock(MyList.class);
+when(listMock.add(anyString())).thenThrow(IllegalStateException.class);
+
+assertThrows(IllegalStateException.class, () -> listMock.add(randomAlphabetic(6)));
+```
+
+- Configure the behavior of a method with void return type — to throw an exception:
+```java
+MyList listMock = mock(MyList.class);
+doThrow(NullPointerException.class).when(listMock).clear();
+
+assertThrows(NullPointerException.class, () -> listMock.clear());
+
+```
+
+- Configure the behavior of multiple calls:
+```java
+MyList listMock = mock(MyList.class);
+when(listMock.add(anyString()))
+  .thenReturn(false)
+  .thenThrow(IllegalStateException.class);
+
+assertThrows(IllegalStateException.class, () -> {
+    listMock.add(randomAlphabetic(6));
+    listMock.add(randomAlphabetic(6));
+});
+```
+
+- Configure the behavior of a spy:
+```java
+MyList instance = new MyList();
+MyList spy = spy(instance);
+
+doThrow(NullPointerException.class).when(spy).size();
+
+assertThrows(NullPointerException.class, () -> spy.size());
+```
+
+- Configure method to call the real, underlying method on a mock:
+```java
+MyList listMock = mock(MyList.class);
+when(listMock.size()).thenCallRealMethod();
+
+assertThat(listMock).hasSize(1);
+```
+- Configure mock method call with custom Answer:
+```java
+MyList listMock = mock(MyList.class);
+doAnswer(invocation -> "Always the same").when(listMock).get(anyInt());
+
+String element = listMock.get(1);
+assertThat(element).isEqualTo("Always the same");
+```
+- doAnswer
+    - Using doAnswer you can do some additionals actions upon method invocation. For example, trigger a callback on queryBookTitle.
+    - When you are using Spy instead of Mock
+      - When using when-thenReturn on Spy Mockito will call real method and then stub your answer. This can cause a problem if you don't want to call real method, like in this sample:
+  ```java
+List list = new LinkedList();
+List spy = spy(list);
+// Will throw java.lang.IndexOutOfBoundsException: Index: 0, Size: 0
+when(spy.get(0)).thenReturn("java");
+assertEquals("java", spy.get(0));
+  ```
+     - Using doAnswer we can stub it safely.
+```java
+List list = new LinkedList();
+List spy = spy(list);
+doAnswer(invocation -> "java").when(spy).get(0);
+assertEquals("java", spy.get(0));
+```
+   - Actually, if you don't want to do additional actions upon method invocation, you can just use doReturn.
+```java
+     List list = new LinkedList();
+List spy = spy(list);
+doReturn("java").when(spy).get(0);
+assertEquals("java", spy.get(0));
 ```
