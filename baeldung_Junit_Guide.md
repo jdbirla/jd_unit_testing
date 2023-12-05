@@ -124,14 +124,14 @@ assertThat(element).isEqualTo("Always the same");
 - doAnswer
     - Using doAnswer you can do some additionals actions upon method invocation. For example, trigger a callback on queryBookTitle.
     - When you are using Spy instead of Mock
-      - When using when-thenReturn on Spy Mockito will call real method and then stub your answer. This can cause a problem if you don't want to call real method, like in this sample:
-  ```java
+      - When using when-thenReturn on Spy Mockito will call real method and then stub your answer. This can cause a problem if you don't want to call real method, like in this sample
+```java
 List list = new LinkedList();
 List spy = spy(list);
 // Will throw java.lang.IndexOutOfBoundsException: Index: 0, Size: 0
 when(spy.get(0)).thenReturn("java");
 assertEquals("java", spy.get(0));
-  ```
+```
      - Using doAnswer we can stub it safely.
 ```java
 List list = new LinkedList();
