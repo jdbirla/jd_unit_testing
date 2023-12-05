@@ -132,7 +132,7 @@ List spy = spy(list);
 when(spy.get(0)).thenReturn("java");
 assertEquals("java", spy.get(0));
 ```
-     - Using doAnswer we can stub it safely.
+   - Using doAnswer we can stub it safely
 ```java
 List list = new LinkedList();
 List spy = spy(list);
