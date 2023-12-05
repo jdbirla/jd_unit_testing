@@ -149,11 +149,11 @@ assertEquals("java", spy.get(0));
 ### Mockito Verify Cookbook
 - https://www.baeldung.com/mockito-verify
    - Verify simple invocation on mock:
-   ```java
+```java
    List<String> mockedList = mock(MyList.class);
 mockedList.size();
 verify(mockedList).size();
-   ```
+```
  - Verify the number of interactions with mock:
 ```java
 List<String> mockedList = mock(MyList.class);
