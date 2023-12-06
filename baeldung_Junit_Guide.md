@@ -234,4 +234,12 @@ verify(mockedList).addAll(argumentCaptor.capture());
 List<String> capturedArgument = argumentCaptor.getValue();
 assertThat(capturedArgument).contains("someElement");
 ```
+### Mocking Void Methods with Mockito
+- Void methods can be used with Mockito’s doNothing(), doThrow(), and doAnswer() methods, making mocking and verifying intuitive:
+- https://www.baeldung.com/mockito-void-methods
+
+### Mocking Static Methods With Mockito
+- https://www.baeldung.com/mockito-mock-static-methods
+### Mockito – Using Spies
+- https://www.baeldung.com/mockito-spy
 
