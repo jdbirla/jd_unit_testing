@@ -1,6 +1,14 @@
 # Baeldung_Junit_Guide.md
 ## Mockito Tutorial
 - https://www.baeldung.com/mockito-series
+### Mockito vs EasyMock vs JMockit
+- https://www.baeldung.com/mockito-vs-easymock-vs-jmockit
+- 1.3. Mock Concepts and Definition
+  - Dummy objects are passed around but never actually used. Usually, they are just used to fill parameter lists.
+  - Fake objects have working implementations, but usually, take some shortcut that makes them not suitable for production (an in-memory database is a good example).
+  - Stubs provide canned answers to calls made during the test, usually not responding at all to anything outside what’s programmed in for the test. Stubs may also record 
+  - information about calls, such as an email gateway stub that remembers the messages it ‘sent’, or maybe only how many messages it ‘sent’.
+  - Mocks are what we are talking about here: objects pre-programmed with expectations that form a specification of the calls they are expected to receive.
 ### Getting Started with Mockito @Mock, @Spy, @Captor and @InjectMocks
 - https://www.baeldung.com/mockito-annotations
 - @Mock Annotation
@@ -236,6 +244,10 @@ assertThat(capturedArgument).contains("someElement");
 ```
 ### Mocking Void Methods with Mockito
 - Void methods can be used with Mockito’s doNothing(), doThrow(), and doAnswer() methods, making mocking and verifying intuitive:
+
+## Power Mock
+- https://www.baeldung.com/intro-to-powermock
+
 - https://www.baeldung.com/mockito-void-methods
 
 ### Mocking Static Methods With Mockito
