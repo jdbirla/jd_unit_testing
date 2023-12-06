@@ -1,4 +1,5 @@
 # Baeldung_Junit_Guide.md
+- https://aggarwal-rohan17.medium.com/simplifying-junit-mockito-and-powermock-d1392059ce87
 ## Mockito Tutorial
 - https://www.baeldung.com/mockito-series
 ### Mockito vs EasyMock vs JMockit
@@ -244,14 +245,14 @@ assertThat(capturedArgument).contains("someElement");
 ```
 ### Mocking Void Methods with Mockito
 - Void methods can be used with Mockito’s doNothing(), doThrow(), and doAnswer() methods, making mocking and verifying intuitive:
-
-## Power Mock
-- https://www.baeldung.com/intro-to-powermock
-
 - https://www.baeldung.com/mockito-void-methods
 
 ### Mocking Static Methods With Mockito
 - https://www.baeldung.com/mockito-mock-static-methods
 ### Mockito – Using Spies
 - https://www.baeldung.com/mockito-spy
+
+## Power Mock
+- https://www.baeldung.com/intro-to-powermock
+
 
