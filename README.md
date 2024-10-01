@@ -813,9 +813,10 @@ public class EmployeeRepositoryITTestContainer extends AbstractionBaseTest {
 ```
 
 ---
-# Testing Quetions
 
-## Testing Overview
+## Testing Questions
+
+### Testing Overview
 - In a Java and Spring Boot project, testing is a critical part of ensuring that the code is reliable, scalable, and maintainable. Testing is often broken into different categories: unit testing, integration testing, and load testing. Here are detailed explanations, strategies, and example tools for each type of testing.
 
 ### 1. **Unit Testing**
@@ -983,7 +984,7 @@ class BasicSimulation extends Simulation {
 By combining unit, integration, and load testing, you ensure that your Spring Boot application is well-tested, reliable, and performs well under different conditions.
 
 
-## Private and Static Method Mocking
+### Private and Static Method Mocking
 Yes, it is possible to mock private and static methods in Java, but mocking these types of methods requires specific tools and techniques that go beyond traditional mocking frameworks like Mockito.
 
 ### 1. **Mocking Private Methods**
