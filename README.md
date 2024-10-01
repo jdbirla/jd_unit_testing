@@ -24,7 +24,7 @@
 
 - Testcontainers provides a high-level API that makes it easy to launch containers and interact with them from your tests, as well as providing support for popular container images, such as those for databases like MySQL or PostgreSQL. This can greatly simplify the process of setting up a test environment, and reduce the amount of code that needs to be written to support tests.
 
-### [Testing Quetions](#testing-quetions)
+### [Testing Questions](#testing-questions)
 #### [Testing Overview](#testing-overview)
 #### [Private and Static Method Mocking](#private-and-static-method-mocking)
 
